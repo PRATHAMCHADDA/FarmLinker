@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "first_name": "Aarav",
+        "last_name": "Mehta",
+        "email": "aarav.mehta@rediffmail.com"
+    },
+    {
+        "id": 2,
+        "first_name": "Diya",
+        "last_name": "Reddy",
+        "email": "diya.reddy@gmail.com"
+    },
+    {
+        "id": 3,
+        "first_name": "Kunal",
+        "last_name": "Sharma",
+        "email": "kunal.sharma@yahoo.in"
+    },
+    {
+        "id": 4,
+        "first_name": "Ishita",
+        "last_name": "Verma",
+        "email": "ishita.verma@outlook.com"
+    },
+    {
+        "id": 5,
+        "first_name": "Rohan",
+        "last_name": "Desai",
+        "email": "rohan.desai@iitd.ac.in"
+    },
+    {
+        "id": 6,
+        "first_name": "Sneha",
+        "last_name": "Patel",
+        "email": "sneha.patel@icai.org"
+    },
+    {
+        "id": 7,
+        "first_name": "Ananya",
+        "last_name": "Joshi",
+        "email": "ananya.joshi@tcs.com"
+    },
+    {
+        "id": 8,
+        "first_name": "Vikram",
+        "last_name": "Kapoor",
+        "email": "vikram.kapoor@infosys.com"
+    },
+    {
+        "id": 9,
+        "first_name": "Mehul",
+        "last_name": "Chawla",
+        "email": "mehul.chawla@hcl.in"
+    },
+    {
+        "id": 10,
+        "first_name": "Pooja",
+        "last_name": "Nair",
+        "email": "pooja.nair@wipro.com"
+    },
+    {
+        "id": 11,
+        "first_name": "Neha",
+        "last_name": "Bansal",
+        "email": "neha.bansal@flipkart.com"
+    },
+    {
+        "id": 12,
+        "first_name": "Yash",
+        "last_name": "Singh",
+        "email": "yash.singh@zoho.com"
+    },
+    {
+        "id": 13,
+        "first_name": "Priya",
+        "last_name": "Malhotra",
+        "email": "priya.malhotra@delhigov.in"
+    },
+    {
+        "id": 14,
+        "first_name": "Rahul",
+        "last_name": "Bhattacharya",
+        "email": "rahul.b@airtelmail.in"
+    },
+    {
+        "id": 15,
+        "first_name": "Tanya",
+        "last_name": "Gupta",
+        "email": "tanya.gupta@snapdeal.com"
+    },
+    {
+        "id": 16,
+        "first_name": "Siddharth",
+        "last_name": "Iyer",
+        "email": "sid.iyer@iitm.ac.in"
+    },
+    {
+        "id": 17,
+        "first_name": "Avni",
+        "last_name": "Rastogi",
+        "email": "avni.r@nic.in"
+    },
+    {
+        "id": 18,
+        "first_name": "Dev",
+        "last_name": "Kulkarni",
+        "email": "dev.kulkarni@mahindra.com"
+    },
+    {
+        "id": 19,
+        "first_name": "Bhavya",
+        "last_name": "Agarwal",
+        "email": "bhavya.agarwal@cognizant.com"
+    },
+    {
+        "id": 20,
+        "first_name": "Kritika",
+        "last_name": "Saxena",
+        "email": "kritika.saxena@reliance.in"
+    }
+]
