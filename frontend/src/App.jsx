@@ -20,6 +20,10 @@ import CartWidget from "./components/Cartwidget";
 import { CartProvider } from './components/CartContext';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Dashboard from "./components/Dashboard";
+
+import LaborList from "./components/labourList";
+
 
 function App() {
   const [chatVisible, setChatVisible] = useState(true);
@@ -48,8 +52,10 @@ function App() {
           } />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/hire" element={<LaborList/>} />
+          {/* <Route path="/available-laborers" element={<AvailableLaborers />} /> */}
         </Routes>
-
         {/* Floating Chatbot Widget */}
         <div className="fixed bottom-6 right-6 z-50 shadow-xl rounded-2xl bg-white border border-green-300">
           {chatVisible ? (
