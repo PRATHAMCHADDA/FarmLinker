@@ -21,9 +21,8 @@ import { CartProvider } from './components/CartContext';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Dashboard from "./components/Dashboard";
-
 import LaborList from "./components/labourList";
-
+import WeatherWidget from "./components/WeatherWidget";
 
 function App() {
   const [chatVisible, setChatVisible] = useState(true);
@@ -32,6 +31,7 @@ function App() {
     <Router>
       <div className="relative bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen font-sans text-gray-900 overflow-x-hidden">
         <Navbar />
+        <WeatherWidget/>
 
         <Routes>
           <Route path="/" element={
@@ -41,21 +41,25 @@ function App() {
               <Menu />
               <Developers />
               <Gallery />
-              <CartProvider>
-                <Shop />
-                <CartWidget />
-                <Cart />
-              </CartProvider>
               <Contact />
               <Footer />
             </>
           } />
+
+          <Route path="/products" element={
+            <CartProvider>
+              <Shop />
+              <CartWidget />
+              <Cart />
+            </CartProvider>
+          } />
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard/>} />
-          <Route path="/hire" element={<LaborList/>} />
-          {/* <Route path="/available-laborers" element={<AvailableLaborers />} /> */}
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/hire" element={<LaborList />} />
         </Routes>
+
         {/* Floating Chatbot Widget */}
         <div className="fixed bottom-6 right-6 z-50 shadow-xl rounded-2xl bg-white border border-green-300">
           {chatVisible ? (
@@ -80,7 +84,6 @@ function App() {
             </button>
           )}
         </div>
-
       </div>
     </Router>
   );

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaUser, FaUsers, FaChartBar, FaCogs } from 'react-icons/fa';
+import axios from 'axios';
 
 const Dashboard = () => {
   const [userData, setUserData] = useState({});
-  const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
+  const [loginTime, setLoginTime] = useState('Not available'); // State for loginTime
+  const [recentActivities, setRecentActivities] = useState([]);
 
   useEffect(() => {
     // Fetch user details
@@ -15,7 +15,7 @@ const Dashboard = () => {
       try {
         const res = await axios.get('http://localhost:5000/api/me', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,  // Assuming the token is saved in localStorage
+            Authorization: `Bearer ${localStorage.getItem('token')}`,  // Using token from localStorage
           },
         });
         setUserData(res.data);
@@ -25,27 +25,38 @@ const Dashboard = () => {
       }
     };
 
-    // Fetch list of users (for admins)
-    const fetchUsers = async () => {
+    // Fetch recent activities (or similar data)
+    const fetchRecentActivities = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/users', {
+        const res = await axios.get('http://localhost:5000/api/recent-activities', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,  // Assuming the token is saved in localStorage
+            Authorization: `Bearer ${localStorage.getItem('token')}`,  // Using token from localStorage
           },
         });
-        setUsers(res.data);
+        setRecentActivities(res.data);
       } catch (err) {
-        setError('Failed to fetch users');
-        console.error(err);
+        console.error('Failed to fetch recent activities');
       }
     };
 
+    // Get login time from localStorage
+    const savedLoginTime = localStorage.getItem('loginTime');
+    if (savedLoginTime) {
+      setLoginTime(new Date(savedLoginTime).toLocaleString()); // Format it nicely
+    }
+
     fetchUserData();
-    fetchUsers();
+    fetchRecentActivities();
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');  // Remove the token on logout
+    localStorage.removeItem('loginTime');  // Optionally clear loginTime as well
+    window.location.href = '/login';  // Redirect to login page
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#001f1f] via-[#0f332f] to-[#003c3c] p-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#001f1f] via-[#0f332f] to-[#003c3c] p-6 pt-24">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -74,60 +85,65 @@ const Dashboard = () => {
             </div>
           </motion.div>
 
-          {/* Total Users Card */}
+          {/* Login Time Section */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="bg-white/10 border border-green-300/20 rounded-xl p-6 text-white"
           >
-            <h3 className="text-xl font-semibold mb-4">Total Users</h3>
-            <div className="text-4xl font-bold mb-4">{users.length}</div>
-            <FaUsers className="text-green-500 text-6xl mx-auto" />
+            <h3 className="text-xl font-semibold mb-4">Login Time</h3>
+            <div className="text-xl font-bold mb-4">{loginTime}</div>
           </motion.div>
 
-          {/* User Statistics Card */}
+          {/* Recent Activities Card */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="bg-white/10 border border-green-300/20 rounded-xl p-6 text-white"
           >
-            <h3 className="text-xl font-semibold mb-4">User Statistics</h3>
-            <div className="text-4xl font-bold mb-4">4.5/5</div>
-            <FaChartBar className="text-green-500 text-6xl mx-auto" />
+            <h3 className="text-xl font-semibold mb-4">Recent Activities</h3>
+            <ul className="space-y-2">
+              {recentActivities.length === 0 ? (
+                <li>No recent activities found.</li>
+              ) : (
+                recentActivities.map((activity, index) => (
+                  <li key={index} className="text-sm">{activity.description}</li>
+                ))
+              )}
+            </ul>
           </motion.div>
         </div>
 
-        {/* Recent Users Section */}
-        <div className="bg-white/10 border border-green-300/20 rounded-xl p-6 text-white">
-          <h3 className="text-2xl font-semibold mb-4">Recent Users</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full table-auto">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2 text-left">Name</th>
-                  <th className="px-4 py-2 text-left">Email</th>
-                  <th className="px-4 py-2 text-left">Role</th>
-                  <th className="px-4 py-2 text-left">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.slice(0, 5).map((user) => (
-                  <tr key={user._id}>
-                    <td className="px-4 py-2">{user.firstName} {user.lastName}</td>
-                    <td className="px-4 py-2">{user.email}</td>
-                    <td className="px-4 py-2">{user.isAdmin ? 'Admin' : 'User'}</td>
-                    <td className="px-4 py-2">
-                      <Link
-                        to={`/user/${user._id}`}
-                        className="text-blue-500 hover:underline"
-                      >
-                        View Profile
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {/* User Stats */}
+        <div className="bg-white/10 border border-green-300/20 rounded-xl p-6 text-white mb-10">
+          <h3 className="text-2xl font-semibold mb-4">User Stats</h3>
+          <div className="flex justify-between">
+            <div className="flex-1 p-4 bg-green-600 rounded-xl text-center">
+              <h4 className="text-xl font-bold">Orders Completed</h4>
+              <p className="text-3xl">{userData.ordersCompleted || 0}</p>
+            </div>
+            <div className="flex-1 p-4 bg-blue-600 rounded-xl text-center">
+              <h4 className="text-xl font-bold">Wishlist Items</h4>
+              <p className="text-3xl">{userData.wishlistItems || 0}</p>
+            </div>
           </div>
         </div>
+
+        {/* User Preferences */}
+        <div className="bg-white/10 border border-green-300/20 rounded-xl p-6 text-white mb-10">
+          <h3 className="text-2xl font-semibold mb-4">User Preferences</h3>
+          <div className="space-y-4">
+            <p className="text-sm">Language: {userData.language || 'English'}</p>
+            <p className="text-sm">Timezone: {userData.timezone || 'GMT'}</p>
+            <Link to="/preferences" className="text-green-500 hover:underline">Edit Preferences</Link>
+          </div>
+        </div>
+
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="mt-6 bg-red-500 text-white px-4 py-2 rounded-lg"
+        >
+          Logout
+        </button>
       </motion.div>
     </div>
   );

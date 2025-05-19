@@ -18,12 +18,17 @@ const Login = () => {
         password,
       });
 
+      // Save JWT token, user data, and login time in localStorage
       localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user', JSON.stringify({ email, role: res.data.role }));
+      localStorage.setItem('loginTime', new Date().toLocaleString());  // Save current time
+
+      // Redirect user based on role (admin or user)
       window.location.href = res.data.role === 'admin' ? '/admin' : '/dashboard';
     } catch (err) {
       console.error('Login failed:', err);
       if (err.response) {
-        setErrorMessage(`❌ ${err.response.data.error || 'Login failed'}`);  // Improved error handling
+        setErrorMessage(`❌ ${err.response.data.error || 'Login failed'}`);
       } else {
         setErrorMessage('❌ Network or server error. Please try again later.');
       }

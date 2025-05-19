@@ -15,7 +15,7 @@ const laborData = [
     skill: 'Electrician',
     experience: '3 years',
     location: 'Panchkula',
-    image: '/images/labors/sita.jpg',
+    image: '/sita.jpg',
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ const laborData = [
     skill: 'Carpenter',
     experience: '7 years',
     location: 'Zirakpur',
-    image: '/images/labors/mohan.jpg',
+    image: '/mohan.jpg',
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ const laborData = [
     skill: 'Painter',
     experience: '2 years',
     location: 'Mohali',
-    image: '/images/labors/geeta.jpg',
+    image: '/geeta.jpg',
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ const laborData = [
     skill: 'Welder',
     experience: '4 years',
     location: 'Ambala',
-    image: '/images/labors/ajay.jpg',
+    image: '/ajay.jpg',
   },
   {
     id: 6,
@@ -47,7 +47,7 @@ const laborData = [
     skill: 'Mason',
     experience: '6 years',
     location: 'Patiala',
-    image: '/images/labors/nisha.jpg',
+    image: '/nisha.jpg',
   },
 ];
 

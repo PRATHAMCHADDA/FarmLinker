@@ -15,7 +15,7 @@ const Cart = () => {
           exit={{ x: 300 }}
           transition={{ type: 'spring', stiffness: 70 }}
         >
-          <h3 className="text-2xl font-bold mb-4 text-green-700">🛍️ Your Cart</h3>
+          <h3 className="text-2xl font-bold mb-4 text-green-700">🛍 Your Cart</h3>
           {cartItems.length === 0 ? (
             <p className="text-gray-500">Cart is empty</p>
           ) : (
@@ -37,7 +37,16 @@ const Cart = () => {
             </ul>
           )}
           <div className="mt-6 border-t pt-4">
-            <p className="font-semibold text-lg text-green-700">Total: ₹{total.toFixed(2)}</p>
+            {/* ₹ */}
+            {/* $ */}
+            <p className="font-semibold text-lg text-green-700">Total: ${total.toFixed(2)}</p>
+          </div>
+          <div className="mt-4">
+            <button
+              className="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition-all duration-300"
+            >
+              Checkout
+            </button>
           </div>
         </motion.div>
       )}
